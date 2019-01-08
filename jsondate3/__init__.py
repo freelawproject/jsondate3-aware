@@ -23,7 +23,7 @@ def _datetime_decoder(dict_):
         # strings which are of type `str`. `jsondate` patches this for
         # consistency so that `unicode` is always returned.
         if value == '':
-            dict_[key] = ''
+            dict_[key] = six.text_type()
             continue
 
         try:
