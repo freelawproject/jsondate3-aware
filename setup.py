@@ -2,12 +2,12 @@ import setuptools
 
 
 setuptools.setup(
-    name='jsondate',
-    version='0.1.2',
-    url='https://github.com/rconradharris/jsondate',
+    name='jsondate3',
+    version='0.1.3',
+    url='https://github.com/nitz14/jsondate',
     license='MIT',
-    author='Rick Harris',
-    author_email='rconradharris@gmail.com',
+    author='Rick Harris, Maciej nitZ Krol',
+    author_email='rconradharris@gmail.com, nitz@o2.pl',
     description='JSON with datetime support',
     long_description=__doc__,
     packages=setuptools.find_packages(),

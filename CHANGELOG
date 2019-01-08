@@ -1,3 +1,7 @@
+0.1.3
+    - Add support for Python3
+    - Added support for serialized Javascript datetime objects (e.g. "datetime.datetime(2016, 12, 01, 03, 15, 45)")
+
 0.1.2
     - Unexpected data types now raise TypeError when encoding
 
