@@ -3,9 +3,9 @@ import datetime
 import json
 import six
 
-DATE_FMT = '%Y-%m-%d'
-ISO8601_FMT = '%Y-%m-%dT%H:%M:%SZ'
-JAVASCRIPT_FMT = 'datetime.datetime(%Y, %m, %d, %H, %M, %S)'
+DATE_FMT = "%Y-%m-%d"
+ISO8601_FMT = "%Y-%m-%dT%H:%M:%SZ"
+JAVASCRIPT_FMT = "datetime.datetime(%Y, %m, %d, %H, %M, %S)"
 
 
 def _datetime_encoder(obj):
@@ -22,7 +22,7 @@ def _datetime_decoder(dict_):
         # The built-in `json` library will `unicode` strings, except for empty
         # strings which are of type `str`. `jsondate` patches this for
         # consistency so that `unicode` is always returned.
-        if value == '':
+        if value == "":
             dict_[key] = six.text_type()
             continue
 
@@ -35,8 +35,7 @@ def _datetime_decoder(dict_):
                 dict_[key] = date_obj.date()
             except (ValueError, TypeError):
                 try:
-                    datetime_obj = datetime.datetime.strptime(value,
-                                                              JAVASCRIPT_FMT)
+                    datetime_obj = datetime.datetime.strptime(value, JAVASCRIPT_FMT)
                     dict_[key] = datetime_obj
                 except (ValueError, TypeError):
                     continue
@@ -45,20 +44,20 @@ def _datetime_decoder(dict_):
 
 
 def dumps(*args, **kwargs):
-    kwargs['default'] = _datetime_encoder
+    kwargs["default"] = _datetime_encoder
     return json.dumps(*args, **kwargs)
 
 
 def dump(*args, **kwargs):
-    kwargs['default'] = _datetime_encoder
+    kwargs["default"] = _datetime_encoder
     return json.dump(*args, **kwargs)
 
 
 def loads(*args, **kwargs):
-    kwargs['object_hook'] = _datetime_decoder
+    kwargs["object_hook"] = _datetime_decoder
     return json.loads(*args, **kwargs)
 
 
 def load(*args, **kwargs):
-    kwargs['object_hook'] = _datetime_decoder
+    kwargs["object_hook"] = _datetime_decoder
     return json.load(*args, **kwargs)
