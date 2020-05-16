@@ -32,9 +32,17 @@ except ImportError:
 
 def _datetime_encoder(obj):
     if isinstance(obj, datetime.datetime):
-        return obj.strftime(ISO8601_FMT)
+        try:
+            return obj.strftime(ISO8601_FMT)
+        except ValueError:
+            # Prior to 1900 in Py2
+            return "%sZ" % obj.isoformat().split("+")[0]
     elif isinstance(obj, datetime.date):
-        return obj.strftime(DATE_FMT)
+        try:
+            return obj.strftime(DATE_FMT)
+        except ValueError:
+            # Prior to 1900 in Py2
+            return "%s" % obj.isoformat().split("T")[0]
 
     raise TypeError
 
