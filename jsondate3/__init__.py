@@ -1,11 +1,33 @@
 from __future__ import absolute_import
 import datetime
 import json
+
 import six
+
 
 DATE_FMT = "%Y-%m-%d"
 ISO8601_FMT = "%Y-%m-%dT%H:%M:%SZ"
 JAVASCRIPT_FMT = "datetime.datetime(%Y, %m, %d, %H, %M, %S)"
+
+
+try:
+    # Python 3
+    from datetime import timezone
+
+    UTC = timezone.utc
+except ImportError:
+    # Python 2
+    class UTC(datetime.tzinfo):
+        def utcoffset(self, dt):
+            return datetime.timedelta(0)
+
+        def tzname(self, dt):
+            return "UTC"
+
+        def dst(self, dt):
+            return datetime.timedelta(0)
+
+    UTC = UTC()
 
 
 def _datetime_encoder(obj):
@@ -27,8 +49,9 @@ def _datetime_decoder(dict_):
             continue
 
         try:
-            datetime_obj = datetime.datetime.strptime(value, ISO8601_FMT)
-            dict_[key] = datetime_obj
+            dict_[key] = datetime.datetime.strptime(
+                value, ISO8601_FMT
+            ).replace(tzinfo=UTC)
         except (ValueError, TypeError):
             try:
                 date_obj = datetime.datetime.strptime(value, DATE_FMT)

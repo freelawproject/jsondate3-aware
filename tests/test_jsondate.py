@@ -44,16 +44,24 @@ class JSONDateTests(unittest.TestCase):
         )
 
     def test_dumps_datetime_roundtrips(self):
-        orig_dict = dict(created_at=datetime.datetime(2011, 1, 1))
-        self.assertEqual(
-            orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
+        orig_dict = dict(
+            created_at=datetime.datetime(2011, 1, 1, tzinfo=jsondate3.UTC)
         )
+        new_dict = jsondate3.loads(jsondate3.dumps(orig_dict))
+        self.assertEqual(orig_dict, new_dict)
 
     def test_dumps_date_roundtrips(self):
         orig_dict = dict(created_at=datetime.date(2011, 1, 1))
         self.assertEqual(
             orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
         )
+
+    def test_dumps_old_datetime_roundtrip(self):
+        orig_dict = dict(
+            created_at=datetime.datetime(1601, 1, 1, tzinfo=jsondate3.UTC)
+        )
+        new_dict = jsondate3.loads(jsondate3.dumps(orig_dict))
+        self.assertEqual(orig_dict, new_dict)
 
     def test_dumps_datelike_string_does_not_roundtrip(self):
         """A string that looks like a date *will* be interpreted as a date.
