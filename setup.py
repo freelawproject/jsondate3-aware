@@ -16,12 +16,12 @@ def read(*parts):
 
 setuptools.setup(
     name="jsondate3-aware",
-    version="0.1.3",
+    version="0.1.4",
     url="https://github.com/freelawproject/jsondate3-aware",
     license="BSD",
     author="Rick Harris, Maciej nitZ Krol, Free Law Project",
     author_email="rconradharris@gmail.com, nitz@o2.pl, info@free.law",
-    description="JSON with datetime support",
+    description="JSON with tz-aware datetime support",
     long_description=read("README.rst"),
     packages=setuptools.find_packages(),
     zip_safe=False,

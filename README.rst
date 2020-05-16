@@ -4,10 +4,10 @@ jsondate3-aware
 
 
 Sick of rewriting the same JSON datetime handling code for each project?
-``jsondate`` is a drop-in replacement for Python's standard ``json`` library that
+``jsondate3-aware`` is a drop-in replacement for Python's standard ``json`` library that
 adds sensible handling of ``datetime`` and ``date`` objects.
 
-``jsondate`` uses ISO8601 for encoding ``datetime`` objects and the
+``jsondate3-aware`` uses ISO8601 for encoding ``datetime`` objects and the
 date-specific part of ISO6801 for encoding ``date`` objects.
 
 It:
