@@ -35,7 +35,9 @@ def _datetime_decoder(dict_):
                 dict_[key] = date_obj.date()
             except (ValueError, TypeError):
                 try:
-                    datetime_obj = datetime.datetime.strptime(value, JAVASCRIPT_FMT)
+                    datetime_obj = datetime.datetime.strptime(
+                        value, JAVASCRIPT_FMT
+                    )
                     dict_[key] = datetime_obj
                 except (ValueError, TypeError):
                     continue

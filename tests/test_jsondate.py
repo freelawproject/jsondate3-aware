@@ -20,7 +20,9 @@ class JSONDateTests(unittest.TestCase):
     def test_dumps_str_roundtrips(self):
         # Generates a ValueError from _datetime_object_hook
         orig_dict = dict(foo="bar")
-        self.assertEqual(orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict)))
+        self.assertEqual(
+            orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
+        )
 
     def test_dump_unicode_roundtrips(self):
         orig_dict = {u"foo": u"bar", "empty": u""}
@@ -37,15 +39,21 @@ class JSONDateTests(unittest.TestCase):
     def test_dumps_none_roundtrips(self):
         # Generates a TypeError from _datetime_object_hook
         orig_dict = dict(foo=None)
-        self.assertEqual(orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict)))
+        self.assertEqual(
+            orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
+        )
 
     def test_dumps_datetime_roundtrips(self):
         orig_dict = dict(created_at=datetime.datetime(2011, 1, 1))
-        self.assertEqual(orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict)))
+        self.assertEqual(
+            orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
+        )
 
     def test_dumps_date_roundtrips(self):
         orig_dict = dict(created_at=datetime.date(2011, 1, 1))
-        self.assertEqual(orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict)))
+        self.assertEqual(
+            orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
+        )
 
     def test_dumps_datelike_string_does_not_roundtrip(self):
         """A string that looks like a date *will* be interpreted as a date.
