@@ -1,5 +1,6 @@
 import codecs
 import os
+
 import setuptools
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -16,7 +17,7 @@ def read(*parts):
 
 setuptools.setup(
     name="jsondate3-aware",
-    version="0.1.4",
+    version="0.2.0",
     url="https://github.com/freelawproject/jsondate3-aware",
     license="BSD",
     author="Rick Harris, Maciej nitZ Krol, Free Law Project",
