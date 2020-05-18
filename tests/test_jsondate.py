@@ -1,10 +1,13 @@
 from __future__ import absolute_import
+
 import datetime
 import json
 import unittest
 
-import jsondate3
+import iso8601
 import six
+
+import jsondate3
 
 StringIO = six.moves.cStringIO
 
@@ -45,7 +48,16 @@ class JSONDateTests(unittest.TestCase):
 
     def test_dumps_datetime_roundtrips(self):
         orig_dict = dict(
-            created_at=datetime.datetime(2011, 1, 1, tzinfo=jsondate3.UTC)
+            created_at=datetime.datetime(2011, 1, 1, tzinfo=iso8601.UTC)
+        )
+        new_dict = jsondate3.loads(jsondate3.dumps(orig_dict))
+        self.assertEqual(orig_dict, new_dict)
+
+    def test_dumps_datetime_pst_roundtrip(self):
+        orig_dict = dict(
+            created_at=datetime.datetime(
+                2011, 1, 1, tzinfo=iso8601.FixedOffset(9, 0, "PST")
+            )
         )
         new_dict = jsondate3.loads(jsondate3.dumps(orig_dict))
         self.assertEqual(orig_dict, new_dict)
@@ -58,7 +70,7 @@ class JSONDateTests(unittest.TestCase):
 
     def test_dumps_old_datetime_roundtrip(self):
         orig_dict = dict(
-            created_at=datetime.datetime(1899, 1, 1, tzinfo=jsondate3.UTC)
+            created_at=datetime.datetime(1899, 1, 1, tzinfo=iso8601.UTC)
         )
         new_dict = jsondate3.loads(jsondate3.dumps(orig_dict))
         self.assertEqual(orig_dict, new_dict)
