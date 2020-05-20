@@ -17,7 +17,7 @@ def read(*parts):
 
 setuptools.setup(
     name="jsondate3-aware",
-    version="0.2.0",
+    version="0.2.1",
     url="https://github.com/freelawproject/jsondate3-aware",
     license="BSD",
     author="Rick Harris, Maciej nitZ Krol, Free Law Project",

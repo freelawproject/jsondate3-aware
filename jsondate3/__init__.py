@@ -76,9 +76,13 @@ def _datetime_decoder(dict_):
             dict_[key] = None
             continue
 
-        m = ISO_8601_DT_REGEX.match(value)
-        if m:
-            dict_[key] = iso8601.parse_date(value)
+        try:
+            m = ISO_8601_DT_REGEX.match(value)
+            if m:
+                dict_[key] = iso8601.parse_date(value)
+        except TypeError:
+            # Not a string or unicode object
+            continue
         else:
             try:
                 date_obj = datetime.datetime.strptime(value, DATE_FMT)

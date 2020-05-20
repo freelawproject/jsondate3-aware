@@ -81,6 +81,23 @@ class JSONDateTests(unittest.TestCase):
             orig_dict, jsondate3.loads(jsondate3.dumps(orig_dict))
         )
 
+    def test_object_with_datetime_roundtrip(self):
+        orig_dict = {
+            "dict": [
+                {
+                    "created_at": datetime.datetime(
+                        2011, 1, 1, tzinfo=iso8601.UTC
+                    )
+                }
+            ]
+        }
+        j_serialization = jsondate3.dumps(orig_dict)
+        self.assertEqual(
+            '{"dict": [{"created_at": "2011-01-01T00:00:00+00:00"}]}',
+            j_serialization,
+        )
+        self.assertEqual(orig_dict, jsondate3.loads(j_serialization))
+
     def test_dumps_datelike_string_does_not_roundtrip(self):
         """A string that looks like a date *will* be interpreted as a date.
 
