@@ -5,6 +5,10 @@ import setuptools
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
+reqs_path = HERE + "/requirements.txt"
+with open(reqs_path) as reqs_file:
+    reqs = reqs_file.read().splitlines()
+
 
 def read(*parts):
     """
@@ -28,7 +32,7 @@ setuptools.setup(
     zip_safe=False,
     include_package_data=True,
     platforms="any",
-    install_requires=["six", "iso8601"],
+    install_requires=reqs,
     classifiers=[
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
